@@ -1,0 +1,7 @@
+pc/bin/
+pc/obj/
+ios/build/
+ios/*.xcodeproj/
+ios/Sources/Info.plist
+ios/Payload/
+*.ipa

@@ -1,0 +1,44 @@
+name: SoundBridge
+options:
+  bundleIdPrefix: io.github.mirazia
+  deploymentTarget:
+    iOS: "15.0"
+  developmentLanguage: en
+settings:
+  base:
+    MARKETING_VERSION: "1.3.3"
+    CURRENT_PROJECT_VERSION: "8"
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    CODE_SIGNING_ALLOWED: "NO"
+    CODE_SIGNING_REQUIRED: "NO"
+    CODE_SIGN_IDENTITY: ""
+targets:
+  SoundBridge:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: ../i18n
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.mirazia.soundbridge
+        PRODUCT_NAME: SoundBridge
+        GENERATE_INFOPLIST_FILE: "NO"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    info:
+      path: Sources/Info.plist
+      properties:
+        CFBundleDisplayName: SoundBridge
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [en, zh-Hans, zh-Hant, ja, ko, es, fr, de, pt, ru]
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UIBackgroundModes: [audio]
+        NSLocalNetworkUsageDescription: SoundBridge needs local network access to receive sound from your PC.
+        NSBonjourServices: [_hearrelay._tcp]
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIApplicationSupportsIndirectInputEvents: true
+        ITSAppUsesNonExemptEncryption: false

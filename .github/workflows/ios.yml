@@ -1,0 +1,31 @@
+name: build-ios
+on:
+  push:
+    paths: ["ios/**", "i18n/**", ".github/workflows/ios.yml"]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate project
+        working-directory: ios
+        run: xcodegen generate
+      - name: Build (unsigned)
+        working-directory: ios
+        run: |
+          xcodebuild -project SoundBridge.xcodeproj -target SoundBridge -configuration Release -sdk iphoneos \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build | tail -60
+          test -d build/Release-iphoneos/SoundBridge.app
+      - name: Package IPA
+        working-directory: ios
+        run: |
+          mkdir -p Payload
+          cp -R build/Release-iphoneos/SoundBridge.app Payload/
+          zip -qry SoundBridge-iOS-unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SoundBridge-iOS-unsigned-ipa
+          path: ios/SoundBridge-iOS-unsigned.ipa
