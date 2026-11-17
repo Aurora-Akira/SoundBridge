@@ -1,0 +1,2 @@
+"CFBundleDisplayName" = "SoundBridge";
+"NSLocalNetworkUsageDescription" = "O SoundBridge precisa de acesso à rede local para receber o som do PC.";

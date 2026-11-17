@@ -1,0 +1,2 @@
+"CFBundleDisplayName" = "SoundBridge";
+"NSLocalNetworkUsageDescription" = "SoundBridge braucht Zugriff auf das lokale Netzwerk, um den PC-Ton zu empfangen.";
